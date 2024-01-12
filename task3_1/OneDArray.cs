@@ -1,0 +1,116 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace task3_1
+{
+    internal class OneDArray
+    {
+        private int[] _array;
+
+        public OneDArray(int size, bool isUser = false)
+        {
+            _array = new int[size];
+
+            if (!isUser)
+            {
+                _array = GetRandomValues(size);
+            }
+            else
+            {
+                _array = GetIntValues(size);
+            }
+
+        }
+
+        public static int[] GetIntValues(int size)
+        {
+            Console.WriteLine("введите " + size + " элементов ");
+            int[] array = new int[size];
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"элемент № {i}");
+                array[i] = int.Parse(Console.ReadLine());
+            }
+
+            return array;
+        }
+        public static int[] GetRandomValues(int size)
+        {
+            int[] array = new int[size];
+
+            Random random = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                array[i] = random.Next(0, 255);
+            }
+
+            return array;
+        }
+
+        public void ShowArray()
+        {
+            foreach (int i in _array)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public double AverageValue()
+        {
+            int count = _array.Length;
+            double sum = 0;
+            for (int i = 0; count > i; i++)
+            {
+                sum += _array[i];
+            }
+            return sum / count;
+        }
+
+        public void DeleteSpecialValues()
+        {
+            int[] b = new int[_array.Length];
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (Math.Abs(_array[i]) >= 100)
+                {
+                    b[i] = _array[i];
+                }
+            }
+            _array = b;
+        }
+
+        public void ArrayWithoutRepeat()
+        {
+            int[] temp = new int[_array.Length];
+
+            for (int i = 0, q = 0; i < _array.Length; i++)
+            {
+                if (!isInArray(temp, _array[i]))
+                {
+                    temp[q] = _array[i];
+                    q++;
+                }
+            }
+            _array = temp;
+        }
+
+        static bool isInArray(int[] a, int el)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == el)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+    }
+
+
+}
