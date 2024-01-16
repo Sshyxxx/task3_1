@@ -58,9 +58,12 @@ namespace task3_1
 
         public void ShowArray()
         {
-            for (int i = 0; i < _array.GetUpperBound(0) + 1; i++)
+            int rows = _array.GetLength(0);
+            int columns = _array.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < _array.Length / (_array.GetUpperBound(0) + 1); j++)
+                for (int j = 0; j < columns; j++)
                 {
                     Console.Write(_array[i, j] + "\t");
                 }
@@ -97,6 +100,12 @@ namespace task3_1
             }
 
             return sum / count;
+        }
+
+        public double Opredilitel()
+        {
+            int[,] a = _array;
+            return a[0, 0] * a[1,1] * a[2,2] + a[2,0]* a[0,1] * a[1,2] + a[0,2] * a[1,0] * a[2,1] - a[2,0] * a[1,1] * a[0,2] - a[1,0] * a[0,1] * a[2,2] - a[2,1] * a[1,2] * a[0,0];
         }
     }
 }

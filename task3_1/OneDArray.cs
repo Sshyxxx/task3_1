@@ -16,7 +16,7 @@ namespace task3_1
 
             if (!isUser)
             {
-                _array = GetRandomValues(size);
+                GetRandomValues(size);
             }
             else
             {
@@ -37,17 +37,13 @@ namespace task3_1
 
             return array;
         }
-        public static int[] GetRandomValues(int size)
+        public void GetRandomValues(int size)
         {
-            int[] array = new int[size];
-
             Random random = new Random();
             for (int i = 0; i < size; i++)
             {
-                array[i] = random.Next(0, 255);
-            }
-
-            return array;
+                _array[i] = random.Next(0, 255);
+            };
         }
 
         public void ShowArray()

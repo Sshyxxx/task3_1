@@ -51,11 +51,11 @@ namespace task3_1
 
             for (int i = 0; i < _array.Length; i++)
             {
-                int col = random.Next(0, 10);
+                int col = random.Next(3, 10);
                 array[i] = new int[col];
                 for (int j = 0; j < col; j++)
                 {
-                    array[i][j]=random.Next(0,255);
+                    array[i][j]=random.Next(0,10);
                 }
             }
             return array;
@@ -67,27 +67,52 @@ namespace task3_1
             {
                 for (int j = 0; j < _array[i].Length; j++)
                 {
-                    Console.Write(_array[i][j].ToString() + " ");
+                    Console.Write(_array[i][j] + " ");
                 }
                 Console.WriteLine();
             }
         }
 
 
-        //public double AverageValue()
-        //{
-        //    //int count = 0;
-        //    //double sum = 0;
-        //    //for (int i = 0; i < _row; i++)
-        //    //{
-        //    //    for (int j = 0; j < _col; j++)
-        //    //    {
-        //    //        sum += _array[i, j];
-        //    //        count++;
-        //    //    }
-        //    //}
+        public double AverageValue() 
+        { 
+            double sum = 0;
+            double count = 0;
+            foreach (int[] item in _array)
+            {
+                sum += item.Sum();
+                count+=item.Length;
+            }
+            return sum/count;
+        }
 
-        //    //return sum / count;
-        //}
+        public double[] AverageInEachArray()
+        {
+            double[] averageArray = new double[_array.Length];
+            double sum = 0;
+            double count = 0;
+            int i = 0;
+            foreach (int[] item in _array)
+            {
+                sum = item.Sum();
+                count = item.Length;
+                averageArray[i++]=sum/count;
+            }
+            return averageArray;
+        }
+
+        public void ChangeChet()
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                for (int j = 0; j < _array[i].Length; j++)
+                {
+                    if(_array[i][j] % 2 == 0)
+                    {
+                        _array[i][j] = i * j;
+                    }
+                }
+            }
+        }
     }
 }
