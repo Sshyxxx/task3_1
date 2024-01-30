@@ -8,52 +8,45 @@ namespace task3_1
 {
     internal class MultiDArray
     {
+        
         private int[,] _array;
-        private int _row;
-        private int _col;
 
         public MultiDArray(int row, int collumn, bool isUser = false) 
         {
             _array = new int[row, collumn];
-            _row = row;
-            _col = collumn;
             if (!isUser)
             {
-                _array = GetRandomValues(row, collumn);
+                GetRandomValues();
             }
             else
             {
-                _array = GetIntValues(row, collumn);
+                GetIntValues();
             }
         }
 
-        public int[,] GetIntValues(int row, int collumn)
+        public void GetIntValues()
         {
-            int[,] array = new int[row, collumn];
-            for (int i = 0; i < row; i++)
+            for (int i = 0; i < _array.GetLength(0); i++)
             {
-                for (int j = 0; j < collumn; j++)
+                for (int j = 0; j < _array.GetLength(1); j++)
                 {
                     Console.WriteLine($"элемент № {j}");
 
-                    array[i, j] = int.Parse(Console.ReadLine());
+                    _array[i, j] = int.Parse(Console.ReadLine());
                 }
             }
-            return array;
         }
 
-        public int[,] GetRandomValues(int row, int collumn)
+        public void GetRandomValues()
         {
-            int[,] array = new int[row, collumn];
             Random random = new Random();
-            for (int i = 0; i < row; i++)
+            for (int i = 0; i < _array.GetLength(0); i++)
             {
-                for (int j = 0; j < collumn; j++)
+                for (int j = 0; j < _array.GetLength(1); j++)
                 {
-                    array[i, j] = random.Next(0, 255);
+                    _array[i, j] = random.Next(0, 255);
                 }
             }
-            return array;
         }
 
         public void ShowArray()
@@ -73,12 +66,12 @@ namespace task3_1
 
         public void ShowReverseLine()
         {
-            for (int i = 0; i < _array.GetUpperBound(0) + 1; i++)
+            for (int i = 0; i < _array.GetLength(0); i++)
             {
-                for (int j = 0; j < _array.Length / (_array.GetUpperBound(0) + 1); j++)
+                for (int j = 0; j < _array.Length / _array.GetLength(1); j++)
                 {
                     if (i % 2 == 0)
-                        Console.Write(_array[i, _col - j-1] +"\t");
+                        Console.Write(_array[i, _array.GetLength(1) - j-1] +"\t");
                     else
                         Console.Write(_array[i, j] + "\t");
                 }
@@ -90,9 +83,9 @@ namespace task3_1
         {
             int count = 0;
             double sum = 0;
-            for (int i = 0; i < _row; i++)
+            for (int i = 0; i < _array.GetLength(0); i++)
             {
-                for (int j=0; j<_col; j++)
+                for (int j=0; j< _array.GetLength(1); j++)
                 {
                     sum += _array[i, j];
                     count++;
@@ -102,10 +95,10 @@ namespace task3_1
             return sum / count;
         }
 
-        public double Opredilitel()
-        {
-            int[,] a = _array;
-            return a[0, 0] * a[1,1] * a[2,2] + a[2,0]* a[0,1] * a[1,2] + a[0,2] * a[1,0] * a[2,1] - a[2,0] * a[1,1] * a[0,2] - a[1,0] * a[0,1] * a[2,2] - a[2,1] * a[1,2] * a[0,0];
-        }
+        //public double Opredilitel()
+        //{
+        //    int[,] a = _array;
+        //    return a[0, 0] * a[1,1] * a[2,2] + a[2,0]* a[0,1] * a[1,2] + a[0,2] * a[1,0] * a[2,1] - a[2,0] * a[1,1] * a[0,2] - a[1,0] * a[0,1] * a[2,2] - a[2,1] * a[1,2] * a[0,0];
+        //}
     }
 }

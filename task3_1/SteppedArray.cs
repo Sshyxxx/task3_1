@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace task3_1
 {
+
+
     internal class SteppedArray
     {
         private int[][] _array;

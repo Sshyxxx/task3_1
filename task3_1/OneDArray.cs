@@ -10,6 +10,8 @@ namespace task3_1
     {
         private int[] _array;
 
+        public int[] Array { get { return _array; } }
+
         public OneDArray(int size, bool isUser = false)
         {
             _array = new int[size];
@@ -20,22 +22,19 @@ namespace task3_1
             }
             else
             {
-                _array = GetIntValues(size);
+                GetIntValues(size);
             }
 
         }
 
-        public static int[] GetIntValues(int size)
+        public void GetIntValues(int size)
         {
             Console.WriteLine("введите " + size + " элементов ");
-            int[] array = new int[size];
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < _array.Length; i++)
             {
                 Console.WriteLine($"элемент № {i}");
-                array[i] = int.Parse(Console.ReadLine());
+                _array[i] = int.Parse(Console.ReadLine());
             }
-
-            return array;
         }
         public void GetRandomValues(int size)
         {
@@ -43,7 +42,7 @@ namespace task3_1
             for (int i = 0; i < size; i++)
             {
                 _array[i] = random.Next(0, 255);
-            };
+            }
         }
 
         public void ShowArray()
